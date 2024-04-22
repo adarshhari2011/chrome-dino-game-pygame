@@ -4,15 +4,15 @@ import random
 pygame.init()
 screen = pygame.display.set_mode((720, 500))
 clock = pygame.time.Clock()
-dino_gif=pygame.image.load("dino.png")
-cactus_image=pygame.image.load("cactus.png")
-font_score=pygame.font.Font("PressStart2P-Regular.ttf",20)
+dino_gif=pygame.image.load("images/dino.png")
+cactus_image=pygame.image.load("images/cactus.png")
+font_score=pygame.font.Font("fonts/PressStart2P-Regular.ttf",20)
 text_surface_score = font_score.render("example" , True , "grey")
 
-gameover_font=pygame.font.Font("PressStart2P-Regular.ttf",30)
+gameover_font=pygame.font.Font("fonts/PressStart2P-Regular.ttf",30)
 text_surface_gameover = gameover_font.render("example" , True , "grey")
 
-restart_font=pygame.font.Font("PressStart2P-Regular.ttf",10)
+restart_font=pygame.font.Font("fonts/PressStart2P-Regular.ttf",10)
 text_surface_restart = font_score.render("example" , True , "grey")
 
 
