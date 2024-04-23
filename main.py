@@ -85,6 +85,10 @@ cactus2.x = cactus1.x + random_space
 
 game_start = False
 
+file = open("data/highscore.txt" , "r")
+highscore = int(file.read())
+file.close()
+
 
 def draw():
     pygame.draw.rect(screen, "white", [player.x, player.y, player.width, player.height])
@@ -92,6 +96,7 @@ def draw():
     pygame.draw.rect(screen, "white", [cactus2.x, cactus2.y, cactus2.width, cactus2.height])
 
 def handle_score_restart():
+    global highscore
     if player.alive == "true":
         player.move()
         player.gravity() 
@@ -101,13 +106,25 @@ def handle_score_restart():
         pass
 
     else : 
-        keys = pygame.key.get_pressed()
+ 
+        # Save high score 
 
+        file = open("data/highscore.txt" , "r")
+        score = int(file.read())
+        file.close()
+        if score < player.score : 
+            file = open("data/highscore.txt" , "w")
+            file.write(str(player.score))
+            file.close()
+            highscore = player.score
+
+        keys = pygame.key.get_pressed()
         if (keys[pygame.K_w] or keys[pygame.K_r]):
             player.alive = "true" 
             cactus1.x = 500
             cactus2.x = 800
             player.score = 0
+            
 
 player.alive = "true"
 running = True
@@ -123,6 +140,8 @@ while running:
 
     if not game_start : 
         print("not started yet")
+        text_surface = font_score.render(f"press s to start the game" , True , "#535353")
+        screen.blit(text_surface , [100,250,800,100])
         pygame.display.flip()
         keys = pygame.key.get_pressed()
         if (keys[pygame.K_s]):
@@ -135,7 +154,7 @@ while running:
 
  
 
-    text_surface = font_score.render(f"Score : {player.score }" , True , "#535353")
+    text_surface = font_score.render(f"HI {highscore} {player.score}" , True , "#535353")
     screen.blit(text_surface , [400,0,500,100])   
     restart="To restart press W or R key."
     gameover="G A M E  O V E R"
